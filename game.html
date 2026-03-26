@@ -1,0 +1,251 @@
+<<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch My Love Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffebee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 600px;
+            background: white;
+            border: 5px solid #ff4081;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        #basket {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            width: 60px;
+            height: 10px;
+            background: #ff4081;
+            border-radius: 0 0 20px 20px;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 25px;
+            user-select: none;
+        }
+
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 18px;
+            color: #ff4081;
+            font-weight: bold;
+        }
+
+        #message-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .back{
+            margin-top: -10px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="win-sound" src="musik.mp3" preload="auto"></audio>
+    
+
+    <h2 style="color: #d81b60;">Tangkap Hatiku Sejumlah 31! untuk memenangkan hatiku❤️</h2>
+    
+    <div id="game-container">
+        <div id="score">Hearts: 0</div>
+        <div id="basket">
+            <img src="basket.jpg" alt="O">
+            
+        </div>
+        <div>
+          
+        </div>
+        
+        <div id="message-overlay">
+            <h2 id="final-title">Hebat! ❤️</h2>
+            <p id="final-message">Kamu berhasil menangkap banyak cintaku hari ini!</p>
+            <button onclick="resetGame()">Main Lagi</button>
+            <button onclick="kembali()">Kembali</button>
+        </div>
+    </div>
+
+    <p style="font-size: 12px; color: #888; margin-top: 10px;">Geser keranjang untuk menangkap hati</p>
+<button type="button" onclick="location.href='index2.html'" class="back">Kembali</button>
+    <script>
+        const container = document.getElementById('game-container');
+        const basket = document.getElementById('basket');
+        const scoreElement = document.getElementById('score');
+        const overlay = document.getElementById('message-overlay');
+        
+        let score = 0;
+        let gameActive = true;
+        let basketX = 50;
+
+        // Kontrol Mouse/Touch
+        container.addEventListener('mousemove', (e) => {
+            if(!gameActive) return;
+            let rect = container.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            moveBasket(x);
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            if(!gameActive) return;
+            let rect = container.getBoundingClientRect();
+            let x = e.touches[0].clientX - rect.left;
+            moveBasket(x);
+        });
+
+        function moveBasket(x) {
+            let containerWidth = container.offsetWidth;
+            if (x > 30 && x < containerWidth - 30) {
+                basket.style.left = x + 'px';
+                basketX = (x / containerWidth) * 100;
+            }
+        }
+
+        function createHeart() {
+            if (!gameActive) return;
+
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * (container.offsetWidth - 30) + 'px';
+            heart.style.top = '-50px';
+            container.appendChild(heart);
+
+            let top = -50;
+            const fallInterval = setInterval(() => {
+                if (!gameActive) {
+                    clearInterval(fallInterval);
+                    heart.remove();
+                    return;
+                }
+
+                top += 4; // Kecepatan jatuh
+                heart.style.top = top + 'px';
+
+                // Cek Tabrakan
+                if (top > 530 && top < 570) {
+                    let heartLeft = parseInt(heart.style.left);
+                    let basketLeft = basket.offsetLeft - 30;
+                    if (heartLeft > basketLeft && heartLeft < basketLeft + 60) {
+                        score++;
+                        scoreElement.innerText = `Hearts: ${score}`;
+                        heart.remove();
+                        clearInterval(fallInterval);
+                        
+                        if(score === 31) {
+                            endGame();
+                        }
+                    }
+                }
+
+                // Jika jatuh ke bawah
+                if (top > 600) {
+                    heart.remove();
+                    
+                    if (heart == basket) 
+                    heart.remove();
+                                                         
+                    
+                    clearInterval(fallInterval);
+                }
+            }, 20);
+        }
+
+        function endGame() {
+            gameActive = false;
+            overlay.style.display = 'flex';
+            document.getElementById('final-title').innerText = "Target Tercapai! ❤️";
+            document.getElementById('final-message').innerText = `Kamu menangkap ${score} hatiku. Tapi sebenarnya, seluruh hatiku sudah jadi milikmu!`;
+        }
+
+        function resetGame() {
+            score = 0;
+            scoreElement.innerText = "Hearts: 0";
+            gameActive = true;
+            overlay.style.display = 'none';
+        }
+
+        // Jalankan game
+        setInterval(createHeart, 800);
+        const winSound = document.getElementById('win-sound'); // Tambahkan variabel ini di atas
+
+function endGame() {
+    gameActive = false;
+    overlay.style.display = 'flex';
+    document.getElementById('final-title').innerText = "Target Tercapai! ❤️";
+    document.getElementById('final-message').innerText = `Kamu menangkap ${score} hatiku. Tapi sebenarnya, seluruh hatiku sudah jadi milikmu sweeetie :3 !`;
+    
+    // MAINKAN MUSIK DI SINI
+    winSound.play().catch(error => {
+        console.log("Autoplay diblokir oleh browser, butuh interaksi user.");
+    });
+}
+
+function resetGame() {
+    score = 0;
+    scoreElement.innerText = "Hearts: 0";
+    gameActive = true;
+    overlay.style.display = 'none';
+    
+    // MATIKAN MUSIK SAAT RESET
+    winSound.pause();
+    winSound.currentTime = 0; // Mengulang musik dari awal untuk sesi berikutnya
+}
+function kembali(){
+    window.location.href = "index2.html";
+}
+
+    </script>
+</body>
+</html>

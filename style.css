@@ -1,0 +1,171 @@
+/* Pengaturan Dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff0f3; /* Warna pink sangat muda */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header / Bagian Atas */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Latar belakang dengan pola Pop It Hati */
+    background-color: #ffb3c6; /* Warna dasar */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 85c-20-15-35-25-35-40a20 20 0 0 1 35-10 20 20 0 0 1 35 10c0 15-15 25-35 40z" fill="%23ff4d6d" opacity="0.4"/></svg>');
+    background-size: 100px 90px; /* Ukuran pola */
+    background-repeat: repeat; /* Mengulang pola */
+    color: white;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    margin-bottom: 10px;
+    /* Memberikan bayangan teks yang lebih kuat */
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* Bagian Pesan */
+.message-section {
+    padding: 80px 10px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.message-section h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #ff4d6d;
+    margin-bottom: 20px;
+}
+
+.message-section p {
+    font-size: 1.1rem;
+    color: #590d22;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Bagian Galeri */
+.gallery-section {
+    padding: 40px 20px 80px;
+    text-align: center;
+    background-color: ffb3c6;
+}
+
+.gallery-section h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #ff4d6d;
+    margin-bottom: 30px;
+}
+
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.photo-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 300px;
+    transition: transform 0.3s ease;
+}
+
+.photo-card:hover {
+    transform: translateY(-10px);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.photo-card p {
+    color: #800f2f;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+/* Footer */
+footer {
+    background-color: #ff4d6d;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-weight: 300;
+}
+
+/* Responsif untuk HP */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+    .photo-card {
+        width: 100%;
+    }
+}
+/* Styling Dasar Tombol */
+.btn-modern {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none; /* Penting jika pakai tag <a> */
+    
+    /* Warna Gradient Biru Modern */
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    
+    border-radius: 50px; /* Membuat ujung bulat sempurna */
+    border: none;
+    cursor: pointer;
+    
+    /* Efek Bayangan Lembut */
+    box-shadow: 0 4px 15px rgba(110, 142, 251, 0.4);
+    
+    /* Animasi saat transisi */
+    transition: all 0.3s ease;
+}
+
+/* Efek saat Kursor di Atas Tombol (Hover) */
+.btn-modern:hover {
+    transform: translateY(-3px); /* Tombol sedikit naik ke atas */
+    box-shadow: 0 8px 20px rgba(110, 142, 251, 0.6);
+    background: linear-gradient(135deg, #a777e3, #6e8efb); /* Tukar warna gradient */
+}
+
+/* Efek saat Tombol Diklik (Active) */
+.btn-modern:active {
+    transform: translateY(1px); /* Sedikit menekan ke bawah saat diklik */
+}

@@ -1,0 +1,218 @@
+/* Reset Dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff5f7; /* Warna background pink sangat muda */
+}
+
+/* Navigasi Utama */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3); /* Shadow lembut warna pink */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Judul "Hai Sweeetie" */
+nav h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: #ff4d6d; /* Warna pink tua/merah muda */
+    cursor: default;
+}
+
+/* Container List Link */
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+/* Jarak antar menu */
+nav ul li {
+    margin-left: 30px;
+}
+
+/* Styling Link */
+nav ul li a {
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Efek Hover (Saat kursor di atas link) */
+nav ul li a:hover {
+    color: #ff4d6d;
+}
+
+/* Garis bawah muncul saat hover */
+nav ul li a::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #ff4d6d;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    transition: 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Responsif untuk HP */
+@media screen and (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    nav ul{
+        margin-top: 15px;
+    }
+    
+    nav ul li {
+        margin: 0 10px;
+    }
+}
+.about-section {
+    padding: 60px 0px;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-section h2 {
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #ff4d6d;
+    margin-bottom: 20px;
+}
+
+.about-section p {
+    font-size: 1rem;
+    color: #590d22;
+    background-color: ffb3c6;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.love-jpg{
+    width : 360px;
+    padding : 20px
+}
+.gallery-section {
+    padding: 40px 20px 80px;
+    text-align: center;
+    background-color: #ffd5f4;
+}
+
+.gallery-section h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 30px;
+}
+/* Container utama galeri */
+.galeri-kenangan {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px; /* Jarak antara baris atas, tengah, dan bawah */
+}
+
+/* --- GAYA POLAROID --- */
+.polaroid-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap; /* Agar responsif di HP */
+    gap: 30px;
+}
+
+.polaroid {
+    background-color: #f8f9fa; /* Warna kertas off-white */
+    padding: 12px 12px 20px 12px;
+    box-shadow: 2px 6px 15px rgba(0, 0, 0, 0.15);
+    width: 240px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    transition: transform 0.3s ease; /* Animasi saat di-hover */
+}
+
+/* Efek interaktif: saat mouse diarahkan, foto akan lurus dan membesar sedikit */
+.polaroid:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    z-index: 10;
+}
+
+.polaroid img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.polaroid p {
+    margin: 15px 0 0 0;
+    font-size: 20px;
+    color: #333;
+    letter-spacing: 2px;
+    font-family : 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sudut kemiringan polaroid */
+.miring-kiri { transform: rotate(-15deg); }
+.miring-kanan { transform: rotate(18deg); }
+.miring-kiri-dikit { transform: rotate(-8deg); }
+.miring-kanan-dikit { transform: rotate(12deg); }
+
+
+/* --- GAYA FILM STRIP (BAGIAN TENGAH) --- */
+.film-strip-container {
+    width: 100%;
+    position: relative;
+    padding: 10px 0;
+}
+
+.film-strip {
+    display: flex;
+    gap: 4px;
+    padding: 6px 0;
+    /* Membuat efek double line warna hijau khas desainmu */
+    border-top: 4px double white; 
+    border-bottom: 4px double white;
+    overflow-x: auto; /* Bisa di-scroll menyamping jika foto melebihi layar */
+    scrollbar-width: thin;
+    scrollbar-color: #80a82b #f0f0f0;
+}
+
+.film-strip img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    /* Memberikan garis pemisah antar foto pada film strip */
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    flex-shrink: 0;
+}
+.special-message{
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color : #ffbfd5;
+}
